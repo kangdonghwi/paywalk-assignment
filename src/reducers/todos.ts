@@ -58,39 +58,26 @@ export const removeTodoAction = (id: string) => ({
 
 function todos(state = initialState, action: any): any {
   switch (action.type) {
-    case ADD_TODOS_REQUEST:
-      return {
-        ...state,
-      };
     case ADD_TODOS_SUCCESS:
       return {
         ...state,
         todoState: [...state.todoState, dummydata(action.data)],
       };
-    case ADD_TODOS_FAILURE:
-      return {
-        ...state,
-      };
-    case TOGGLE_TODOS_REQUEST:
+
+    case TOGGLE_TODOS_SUCCESS:
       return {
         ...state,
         todoState: state.todoState.map(todo =>
-          todo.id === action.id ? { ...todo, isCheck: !todo.isCheck } : todo,
+          todo.id === action.data ? { ...todo, isCheck: !todo.isCheck } : todo,
         ),
       };
-    case REMOVE_TODOS_REQUEST:
-      return {
-        ...state,
-      };
+
     case REMOVE_TODOS_SUCCESS:
       return {
         ...state,
         todoState: state.todoState.filter(todo => todo.id !== action.data),
       };
-    case REMOVE_TODOS_FAILURE:
-      return {
-        ...state,
-      };
+
     default:
       return state;
   }

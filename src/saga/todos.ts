@@ -5,6 +5,9 @@ import {
   REMOVE_TODOS_FAILURE,
   REMOVE_TODOS_REQUEST,
   REMOVE_TODOS_SUCCESS,
+  TOGGLE_TODOS_FAILURE,
+  TOGGLE_TODOS_REQUEST,
+  TOGGLE_TODOS_SUCCESS,
 } from 'reducers/todos';
 import axios from 'axios';
 import {
@@ -45,6 +48,26 @@ function* addTodo(action: any) {
   }
 }
 
+function toggleTodoAPI(data: any) {
+  return axios.post('/api/todo', data);
+}
+
+function* toggleTodo(action: any) {
+  try {
+    //const result = yield call(toggleTodoAPI,action.data)
+    yield delay(100);
+    yield put({
+      type: TOGGLE_TODOS_SUCCESS,
+      data: action.data,
+    });
+  } catch (err: any) {
+    yield put({
+      type: TOGGLE_TODOS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function removeTodoAPI(data: any) {
   return axios.delete('/api/todo', data);
 }
@@ -73,10 +96,14 @@ function* watchRemoveTodo() {
   yield takeLatest(REMOVE_TODOS_REQUEST, removeTodo);
 }
 
+function* watchToggleTodo() {
+  yield takeLatest(TOGGLE_TODOS_REQUEST, toggleTodo);
+}
+
 export default function* todoSaga(): Generator<
   AllEffect<ForkEffect<void>>,
   void,
   unknown
 > {
-  yield all([fork(watchAddTodo), fork(watchRemoveTodo)]);
+  yield all([fork(watchAddTodo), fork(watchRemoveTodo), fork(watchToggleTodo)]);
 }
