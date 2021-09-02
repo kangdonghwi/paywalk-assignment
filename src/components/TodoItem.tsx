@@ -1,10 +1,11 @@
 import {
-  editTodoAction,
+  EDIT_TODOS_REQUEST,
   removeTodoAction,
   toggleTodoAction,
 } from 'reducers/todos';
 import { Todo } from 'types';
-import { useCallback } from 'react';
+import useInput from 'hooks/useInput';
+import { useCallback, useState } from 'react';
 import {
   MdCheckBoxOutlineBlank,
   MdCheckBox,
@@ -19,7 +20,9 @@ interface TodoItemProps {
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
-  const { id, content, isCheck, createdAt } = todo;
+  const { id, content, isCheck } = todo;
+  const [open, setOpen] = useState(false);
+  const [text, onChangeText, setText] = useInput('');
   const dispatch = useDispatch();
 
   const onRemoveTodo = useCallback(() => {
@@ -30,18 +33,41 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     dispatch(toggleTodoAction(id));
   }, []);
 
-  const onEditTodo = useCallback(() => {
-    dispatch(editTodoAction(content));
-  }, []);
+  const OpenInputText = () => {
+    setOpen(true);
+  };
+
+  const onEditTodo = useCallback(
+    e => {
+      e.preventDefault();
+
+      dispatch({
+        type: EDIT_TODOS_REQUEST,
+        data: {
+          id: id,
+          content: text,
+        },
+      });
+      setOpen(false);
+      setText('');
+    },
+    [text],
+  );
 
   return (
     <ItemWrapper>
       <Checkbox onClick={onToggleTodo}>
         {isCheck ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </Checkbox>
-      <Text isCheck={todo.isCheck}>{content}</Text>
-      <Date isCheck={todo.isCheck}>{createdAt}</Date>
-      <EditButton onClick={onEditTodo} />
+      {open ? (
+        <Form onSubmit={onEditTodo}>
+          <Input value={text} onChange={onChangeText}></Input>
+          <FormButton type="submit">수정</FormButton>
+        </Form>
+      ) : (
+        <Text isCheck={todo.isCheck}>{content}</Text>
+      )}
+      <EditButton onClick={OpenInputText} />
       <RemoveButton onClick={onRemoveTodo} />
     </ItemWrapper>
   );
@@ -61,7 +87,21 @@ const ItemWrapper = styled.li`
   padding: 1.5rem 0.8rem;
   align-items: center;
 `;
+const Form = styled.form`
+  flex: 1;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+`;
 
+const Input = styled.input`
+  width: 70%;
+  height: 22px;
+`;
+
+const FormButton = styled.button`
+  margin-left: 10px;
+`;
 const Checkbox = styled.div`
   width: 20px;
   height: 20px;

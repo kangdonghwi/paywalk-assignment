@@ -1,10 +1,11 @@
 import { addTodoAction } from 'reducers/todos';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { useState, useCallback, ReactElement } from 'react';
+import { useCallback, ReactElement } from 'react';
+import useInput from 'hooks/useInput';
 
 const TodoForm = (): ReactElement => {
-  const [text, setText] = useState('');
+  const [text, onChangeText, setText] = useInput('');
   const dispatch = useDispatch();
 
   const onSubmit = useCallback(
@@ -16,16 +17,12 @@ const TodoForm = (): ReactElement => {
     [text],
   );
 
-  const onchangeText = useCallback(e => {
-    setText(e.target.value);
-  }, []);
-
   return (
     <TodoInputWrapper>
       <InsertForm onSubmit={onSubmit}>
         <CustomInput
           value={text}
-          onChange={onchangeText}
+          onChange={onChangeText}
           placeholder="할 일을 적어주세요."
         />
         <Button type="submit">추가</Button>
