@@ -12,7 +12,6 @@ import {
   TOGGLE_TODOS_REQUEST,
   TOGGLE_TODOS_SUCCESS,
 } from 'reducers/todos';
-import axios from 'axios';
 import {
   all,
   AllEffect,
@@ -46,9 +45,9 @@ function* loadTodo(action) {
 }
 */
 
-function addTodoAPI(data: void) {
+/*function addTodoAPI(data: void) {
   return axios.post('todo', data);
-}
+}*/
 
 function* addTodo(action: any) {
   try {
@@ -72,9 +71,9 @@ function* addTodo(action: any) {
   }
 }
 
-function toggleTodoAPI(data: void) {
+/*function toggleTodoAPI(data: void) {
   return axios.patch(`todo/${data}/toggle`);
-}
+}*/
 
 function* toggleTodo(action: any) {
   try {
@@ -91,9 +90,9 @@ function* toggleTodo(action: any) {
   }
 }
 
-function editTodoAPI(data: void) {
+/*function editTodoAPI(data: void) {
   return axios.patch(`todo/${data}`);
-}
+}*/
 
 function* editTodo(action: any) {
   try {
@@ -113,9 +112,9 @@ function* editTodo(action: any) {
   }
 }
 
-function removeTodoAPI(data: void) {
+/*function removeTodoAPI(data: void) {
   return axios.delete(`todo/${data}`);
-}
+}*/
 
 function* removeTodo(action: any) {
   try {
