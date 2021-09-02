@@ -24,8 +24,30 @@ import {
 } from 'redux-saga/effects';
 import shortId from 'shortid';
 
+/*
+function loadTodoAPI() {
+  return axios.get(`/todo`);
+}
+
+function* loadTodo(action) {
+  try {
+    const result = yield call(loadTodoAPI);
+    yield put({
+      type: LOAD_TODO_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(error);
+    yield put({
+      type: LOAD_TODO_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+*/
+
 function addTodoAPI(data: void) {
-  return axios.post('/api/todo', data);
+  return axios.post('todo', data);
 }
 
 function* addTodo(action: any) {
@@ -92,7 +114,7 @@ function* editTodo(action: any) {
 }
 
 function removeTodoAPI(data: void) {
-  return axios.delete(`/todo/${data}`);
+  return axios.delete(`todo/${data}`);
 }
 
 function* removeTodo(action: any) {
