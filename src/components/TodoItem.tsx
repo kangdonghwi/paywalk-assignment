@@ -126,18 +126,6 @@ const Text = styled.div<{ isCheck: boolean }>`
     `}
 `;
 
-const Date = styled.div<{ isCheck: boolean }>`
-  flex: 0.3;
-  font-size: 16px;
-
-  ${props =>
-    props.isCheck &&
-    css`
-      color: #ced4da;
-      text-decoration: line-through;
-    `}
-`;
-
 const EditButton = styled(MdEdit)`
   margin-right: 10px;
   cursor: pointer;
