@@ -1,19 +1,17 @@
-import React from 'react';
-import TodoItem from './TodoItem';
+import { addTodoAction } from 'reducers/todos';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { useCallback } from 'react';
-import { addTodo } from 'reducers/todos';
+import { useDispatch } from 'react-redux';
+import { useState, useCallback, ReactElement } from 'react';
 
-const TodoForm = (): any => {
+const TodoForm = (): ReactElement => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
 
   const onSubmit = useCallback(
     e => {
       e.preventDefault();
-      dispatch(addTodo(text));
+      dispatch(addTodoAction(text));
+      setText('');
     },
     [text],
   );
@@ -30,7 +28,7 @@ const TodoForm = (): any => {
           onChange={onchangeText}
           placeholder="할 일을 적어주세요."
         />
-        <button type="submit">제출</button>
+        <Button type="submit">추가</Button>
       </InsertForm>
     </TodoInputWrapper>
   );
@@ -39,20 +37,46 @@ const TodoForm = (): any => {
 export default TodoForm;
 
 const TodoInputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 1.5rem 0;
-`;
-const InsertForm = styled.form``;
-
-const CustomInput = styled.textarea`
   width: 100%;
-  height: 7rem;
-  resize: none;
-  border: 1px solid #e6e6e6;
-  padding: 0.7rem 1.2rem;
+  border-bottom: 1px solid #eeeeee;
+`;
+const InsertForm = styled.form`
+  display: flex;
+  background: #eeeeee;
+  padding-left: 40px;
+  padding-top: 36px;
+  padding-right: 60px;
+  padding-bottom: 36px;
+`;
 
-  &:focus {
-    outline: none;
+const CustomInput = styled.input`
+  padding: 12px;
+  border: 1px solid #dddddd;
+  width: 100%;
+  outline: none;
+  font-size: 21px;
+  box-sizing: border-box;
+  &::placeholder {
+    color: #dddddd;
+    font-size: 16px;
   }
+`;
+
+const Button = styled.button`
+  background: black;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  left: 50%;
+  transform: translate(50%, 0%);
+  color: white;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;

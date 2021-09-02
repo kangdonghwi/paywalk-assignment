@@ -15,9 +15,21 @@ function App(): ReactElement {
 export default App;
 
 const TodoBody = styled.div`
-  max-width: 100rem;
-  display: flex;
+  width: 70%;
+  height: 800px;
+
+  min-width: 360px;
+  max-width: 860px;
+
+  position: relative;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.1);
+
   margin: 0 auto;
-  padding-top: 10rem;
-  box-sizing: border-box;
+
+  margin-top: 96px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
 `;

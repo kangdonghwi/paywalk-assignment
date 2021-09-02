@@ -1,13 +1,16 @@
 import TodoItem from './TodoItem';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ReactElement } from 'react';
+import { Todo } from 'types';
 
-const TodoList = (): any => {
-  const todos = useSelector((state: any) => state.todos.todoState);
+const TodoList = (): ReactElement => {
+  const { todoState, count } = useSelector((state: any) => state.todos);
 
   return (
     <ListWrapper>
-      {todos.map((todo: any) => (
+      <Count>남은일이 {count}개 남았어요</Count>
+      {todoState.map((todo: Todo) => (
         <TodoItem todo={todo} key={todo.id} />
       ))}
     </ListWrapper>
@@ -17,11 +20,13 @@ const TodoList = (): any => {
 export default TodoList;
 
 const ListWrapper = styled.div`
-  min-height: 95vh;
   flex: 1;
-  font-size: 1.5rem;
-  color: #676c71;
-  background-color: #f6f8fa;
-  border-radius: 1rem;
-  margin: 0.5rem;
+  padding: 20px 32px;
+  padding-bottom: 48px;
+  overflow-y: auto;
+`;
+const Count = styled.div`
+  font-size: 22px;
+  margin: 0 1.8rem;
+  margin-bottom: 1rem;
 `;
