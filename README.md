@@ -22,3 +22,5 @@
 ## 🖥 작동 화면
 
 ![image](https://user-images.githubusercontent.com/42789883/131779185-23e4589b-f5e1-4cc8-b03d-eb2aec245935.png)
+![Animation1](https://user-images.githubusercontent.com/42789883/131782318-c29fc741-7f2f-4238-a220-7f03daed9eb1.gif)
+
