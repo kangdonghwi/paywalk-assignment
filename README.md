@@ -1,8 +1,9 @@
 # [Assignment 9] 페이워크 TODO LIST
 
-## 🔗 배포 주소
+## 📝 구현 목록
 
-- 아래 URL을 클릭하면 배포된 페이지로 이동합니다.
+- ts + react + redux + redux-saga 사용
+- CRUD 구현
 
 <br>
 
@@ -15,13 +16,6 @@
 # serve with hot reload at localhost:3000
  $ yarn start
 ```
-
-<br>
-
-## 📝 구현 목록
-
-- ts + react + redux + redux-saga 사용
-- CRUD 구현
 
 <br>
 
