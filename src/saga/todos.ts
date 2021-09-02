@@ -23,6 +23,7 @@ import {
 } from 'redux-saga/effects';
 import shortId from 'shortid';
 
+//get으로 todolist를 불러오기를 요청하고 성공,실패를 구분해서 리듀서에 data로 전달
 /*
 function loadTodoAPI() {
   return axios.get(`/todo`);
@@ -49,6 +50,7 @@ function* loadTodo(action) {
   return axios.post('todo', data);
 }*/
 
+//post로 todolist에 추가를 요청하고 성공,실패를 구분해서 리듀서에 data로 전달
 function* addTodo(action: any) {
   try {
     //const result = yield call(addTodoAPI,action.data)
@@ -74,7 +76,7 @@ function* addTodo(action: any) {
 /*function toggleTodoAPI(data: void) {
   return axios.patch(`todo/${data}/toggle`);
 }*/
-
+//patch로 변경을 요청하고 성공,실패를 구분해서 리듀서에 data로 전달
 function* toggleTodo(action: any) {
   try {
     //const result = yield call(toggleTodoAPI,action.data)
@@ -93,7 +95,7 @@ function* toggleTodo(action: any) {
 /*function editTodoAPI(data: void) {
   return axios.patch(`todo/${data}`);
 }*/
-
+//patch로 변경을 요청하고 성공,실패를 구분해서 리듀서에 data로 전달
 function* editTodo(action: any) {
   try {
     //const result = yield call(editTodoAPI,action.data)
@@ -115,7 +117,7 @@ function* editTodo(action: any) {
 /*function removeTodoAPI(data: void) {
   return axios.delete(`todo/${data}`);
 }*/
-
+//delete로 변경을 요청하고 성공,실패를 구분해서 리듀서에 data로 전달
 function* removeTodo(action: any) {
   try {
     //const result = yield call(removeTodoAPI,action.data)
@@ -131,7 +133,7 @@ function* removeTodo(action: any) {
     });
   }
 }
-
+//takeLatest를 사용해서 여러번의 시도 중 마지막요청만 처리할 수 있음
 function* watchAddTodo() {
   yield takeLatest(ADD_TODOS_REQUEST, addTodo);
 }

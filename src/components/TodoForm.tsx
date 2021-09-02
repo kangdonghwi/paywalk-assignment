@@ -4,10 +4,12 @@ import { useDispatch } from 'react-redux';
 import { useCallback, ReactElement } from 'react';
 import useInput from 'hooks/useInput';
 
+//input form 컴포넌트
 const TodoForm = (): ReactElement => {
   const [text, onChangeText, setText] = useInput('');
   const dispatch = useDispatch();
 
+  //버튼을 누르면 addTodoAction를 디스패치하여 리스트에 추가됌
   const onSubmit = useCallback(
     e => {
       e.preventDefault();

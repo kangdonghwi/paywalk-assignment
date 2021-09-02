@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReactElement } from 'react';
 import { Todo } from 'types';
-
+//list컴포넌트 useSelector로 state를 가져다 사용
 const TodoList = (): ReactElement => {
   const { todoState, count } = useSelector((state: any) => state.todos);
 

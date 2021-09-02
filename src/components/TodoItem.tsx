@@ -18,7 +18,7 @@ import styled, { css } from 'styled-components';
 interface TodoItemProps {
   todo: Todo;
 }
-
+//todoItem 컴포넌트, 여기서 제거,토글,수정기능 처리
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const { id, content, isCheck } = todo;
   const [open, setOpen] = useState(false);

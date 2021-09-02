@@ -47,6 +47,7 @@ const dummydata = (data: Todo) => ({
   createdAt: data.createdAt,
 });
 
+//액션 생성 함수. 여러 컴포넌트에서 사용하기위해 함수로 생성
 export const addTodoAction = (data: string) => ({
   type: ADD_TODOS_REQUEST,
   data,
@@ -67,6 +68,7 @@ export const removeTodoAction = (id: string) => ({
   id,
 });
 
+//todo리듀서. 사가에서 request를 받고 success가 된다면 여기서 state 변경. 불변성을 지키면서 개발.
 function todos(state = initialState, action: any): any {
   switch (action.type) {
     case ADD_TODOS_SUCCESS:
