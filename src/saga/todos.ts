@@ -79,7 +79,10 @@ function* editTodo(action: any) {
     yield delay(300);
     yield put({
       type: EDIT_TODOS_SUCCESS,
-      data: action.data,
+      data: {
+        id: action.data.id,
+        content: action.data.content,
+      },
     });
   } catch (err) {
     yield put({

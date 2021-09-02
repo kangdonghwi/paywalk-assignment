@@ -87,7 +87,9 @@ function todos(state = initialState, action: any): any {
       return {
         ...state,
         todoState: state.todoState.map(todo =>
-          todo.id === action.data ? { ...todo, content: action.data } : todo,
+          todo.id === action.data.id
+            ? { ...todo, content: action.data.content }
+            : todo,
         ),
       };
     case REMOVE_TODOS_SUCCESS:
