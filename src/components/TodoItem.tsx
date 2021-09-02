@@ -1,58 +1,108 @@
+import {
+  editTodoAction,
+  removeTodoAction,
+  toggleTodoAction,
+} from 'reducers/todos';
+import { Todo } from 'types';
 import { useCallback } from 'react';
 import {
   MdCheckBoxOutlineBlank,
   MdCheckBox,
   MdRemoveCircleOutline,
+  MdEdit,
 } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { REMOVE_TODOS_REQUEST, TOGGLE_TODOS_REQUEST } from 'reducers/todos';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface TodoItemProps {
-  todo: any;
+  todo: Todo;
 }
 
-const TodoItem = ({ todo }: TodoItemProps): any => {
+const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const { id, content, isCheck, createdAt } = todo;
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const onRemoveTodo = useCallback(() => {
-    dispath({
-      type: REMOVE_TODOS_REQUEST,
-      data: id,
-    });
+    dispatch(removeTodoAction(id));
   }, []);
 
   const onToggleTodo = useCallback(() => {
-    dispath({
-      type: TOGGLE_TODOS_REQUEST,
-      data: id,
-    });
+    dispatch(toggleTodoAction(id));
+  }, []);
+
+  const onEditTodo = useCallback(() => {
+    dispatch(editTodoAction(content));
   }, []);
 
   return (
     <ItemWrapper>
-      <div onClick={onToggleTodo}>
+      <Checkbox onClick={onToggleTodo}>
         {isCheck ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-      </div>
-      <div className="text">{content}</div>
-      <div>{createdAt}</div>
-      <MdRemoveCircleOutline onClick={onRemoveTodo} />
+      </Checkbox>
+      <Text isCheck={todo.isCheck}>{content}</Text>
+      <Date isCheck={todo.isCheck}>{createdAt}</Date>
+      <EditButton onClick={onEditTodo} />
+      <RemoveButton onClick={onRemoveTodo} />
     </ItemWrapper>
   );
 };
 
 export default TodoItem;
 
-export const ItemWrapper = styled.li`
+const ItemWrapper = styled.li`
   display: flex;
   line-height: 2rem;
   font-size: 1.5rem;
-  box-shadow: 0rem 0.3rem 0.9rem -0.8rem #0000003b;
   background-color: #fff;
   border: 1px solid #eeeeee;
   border-radius: 1rem;
   margin: 0 1.8rem;
   margin-bottom: 1rem;
   padding: 1.5rem 0.8rem;
+  align-items: center;
+`;
+
+const Checkbox = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 16px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  cursor: pointer;
+`;
+
+const Text = styled.div<{ isCheck: boolean }>`
+  flex: 1;
+  font-size: 18px;
+
+  ${props =>
+    props.isCheck &&
+    css`
+      color: #ced4da;
+      text-decoration: line-through;
+    `}
+`;
+
+const Date = styled.div<{ isCheck: boolean }>`
+  flex: 0.3;
+  font-size: 16px;
+
+  ${props =>
+    props.isCheck &&
+    css`
+      color: #ced4da;
+      text-decoration: line-through;
+    `}
+`;
+
+const EditButton = styled(MdEdit)`
+  margin-right: 10px;
+  cursor: pointer;
+`;
+
+const RemoveButton = styled(MdRemoveCircleOutline)`
+  cursor: pointer;
 `;
